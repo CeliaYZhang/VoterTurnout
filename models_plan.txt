@@ -1,0 +1,13 @@
+Celia
+Adaboost DT
+Random Forest 
+Bagged DT
+
+Cathy
+SGD
+SVM
+Logistic Regression 
+
+Reng
+Perceptron
+Neural Net
