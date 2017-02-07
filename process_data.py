@@ -61,7 +61,7 @@ def imputeMissingVals(X, Xtest):
     return X, Xtest
 
 
-## Select against featuers with low variance and select 
+## Select against features with low variance and select 
 ## a percentile perc of useful features. 
 def featureSelect(X, Y, Xtest, perc):
     sel = VarianceThreshold()

@@ -4,9 +4,15 @@ Random Forest
 Bagged DT
 
 Cathy
-SGD
-SVM
-Logistic Regression 
+SGD - submitted with .76 something
+SVM - running
+ridge - getting <.2
+logistic
+
+would be worth trying:
+naive Bayes
+LDA
+k-nearest neighbor
 
 Reng
 Perceptron
