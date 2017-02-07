@@ -23,13 +23,13 @@ def classifyAll():
     print(clf.cv_results_)
     return clf
 
-def classifyOne(loss_fun, a):
-    clf = SGDClassifier(loss=loss_fun, alpha=a)
+def classifyOne(pen, c_err):
+    clf = LogisticRegression(penalty=pen, C=c_err)
     clf = clf.fit(X, Y)
     return clf
 
 def predict():
-    clf = classifyOne(1, 1)
+    clf = classifyOne('l2', 0.1)
     Ypred = clf.predict(Xtest)
     return Ypred
 
@@ -44,5 +44,4 @@ def write(filename):
             else:
                 writ.writerow([i, 1])
 
-# write('predictions/SGDLog_pred.csv')
-classifyAll()
+write('LR_pred.csv')

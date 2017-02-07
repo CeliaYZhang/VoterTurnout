@@ -8,28 +8,27 @@ testfile08 = 'test_2008.csv'
 perc = 75
 
 X, Y, Xtest = pd.processData(trainfile08, testfile08, perc)
-parameters = {'C': [0.01, 0.1, 1, 10, 100],
-              'gamma': [0.01, 0.1, 1, 10, 100]
+parameters = {'C': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000]
               }
 
 def classifyAll():
-    model = svm.SVC()
+    model = svm.LinearSVC()
     clf = GridSearchCV(model, parameters, verbose=20)
     clf = clf.fit(X, Y)
-    with open('SVM.csv', 'w') as csv_file:
+    with open('LinearSVC.csv', 'w') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', lineterminator='\n')
         for key, value in clf.cv_results_.items():
            writer.writerow([key, value])
     print(clf.cv_results_)
     return clf
 
-def classifyOne(c_err, gam):
-    clf = svm.SVC(C=c_err, gamma=gam)
+def classifyOne(c_err):
+    clf = svm.LinearSVC(C=c_err)
     clf = clf.fit(X, Y)
     return clf
 
 def predict():
-    clf = classifyOne(1, 1)
+    clf = classifyOne(0.01)
     Ypred = clf.predict(Xtest)
     return Ypred
 
@@ -44,5 +43,4 @@ def write(filename):
             else:
                 writ.writerow([i, 1])
 
-# write('predictions\SVM_pred.csv')
-classifyAll()
+write('LinearSVC_pred.csv')

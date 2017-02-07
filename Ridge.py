@@ -1,6 +1,6 @@
 import process_data as pd
 import csv
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import RidgeClassifier
 from sklearn.model_selection import GridSearchCV
 
 trainfile08 = 'train_2008.csv'
@@ -8,11 +8,11 @@ testfile08 = 'test_2008.csv'
 perc = 75
 
 X, Y, Xtest = pd.processData(trainfile08, testfile08, perc)
-parameters = {'alpha': [.000000001, 100000]
+parameters = {'alpha': [0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05]
               }
 
 def classifyAll():
-    model = Ridge()
+    model = RidgeClassifier()
     clf = GridSearchCV(model, parameters, verbose=20)
     clf = clf.fit(X, Y)
     with open('Ridge.csv', 'w') as csv_file:
@@ -23,12 +23,12 @@ def classifyAll():
     return clf
 
 def classifyOne(a):
-    clf = Ridge(alpha=a)
+    clf = RidgeClassifier(alpha=a)
     clf = clf.fit(X, Y)
     return clf
 
 def predict():
-    clf = classifyOne(1, 1)
+    clf = classifyOne(0.001)
     Ypred = clf.predict(Xtest)
     return Ypred
 
@@ -43,5 +43,4 @@ def write(filename):
             else:
                 writ.writerow([i, 1])
 
-# write('predictions/Ridge_pred.csv')
-classifyAll()
+write('Ridge_pred.csv')
