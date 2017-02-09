@@ -28,8 +28,8 @@ def classifyOne():
     clf = AdaBoostClassifier(
         base_estimator=DecisionTreeClassifier(
             max_depth=1,
-            max_features=None), 
-        n_estimators=250)    
+            max_features='log2'), 
+        n_estimators=750)    
     return clf
 
 def predict():
@@ -50,4 +50,4 @@ def write(filename):
             else:
                 writ.writerow([i, 1])
 
-write('predictions\AdaDT_Pred.csv')
+write('predictions\AdaDT_Pred_log2.csv')
